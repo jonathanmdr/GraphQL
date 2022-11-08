@@ -77,16 +77,21 @@ mutation createCourseQl {
 
 ### Example of queries:
 ```graphql
-# Find all categories
+# Find all categories with courses
 query findAllCategories {
   categories {
     id
     name
     description
+    courses {
+      id
+      name
+      description
+    }
   }
 }
 
-# Find all courses
+# Find all courses with category
 query findAllCourses {
   courses {
     id
