@@ -11,3 +11,39 @@ Follow all steps in the documentation of [gqlgen](https://gqlgen.com/getting-sta
 ```sh
 go run github.com/99designs/gqlgen generate
 ```
+
+### Creating SQLite database:
+---
+```sh
+# For connect on database
+sqlite3 db.sqlite
+```
+```sql
+-- For create table
+create table categories(
+    id string,
+    name string,
+    description string
+);
+```
+
+### Running server:
+---
+```sh
+go run cmd/server/server.go
+```
+
+### Example of mutations:
+```graphql
+# Create a new category
+mutation createCategoryQl {
+  createCategory(input: {
+    name: "My first category"
+    description: "My first category description"
+  }) {
+    id
+    name
+    description
+  }
+}
+```
