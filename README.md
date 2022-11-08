@@ -19,11 +19,20 @@ go run github.com/99designs/gqlgen generate
 sqlite3 db.sqlite
 ```
 ```sql
--- For create table
+-- For create table categories
 create table categories(
-    id string,
+    id string primary key,
     name string,
     description string
+);
+
+-- For create table courses
+create table courses(
+    id string primary key,
+    name string,
+    description string,
+    category_id string,
+    foreign key (category_id) references categories(id)
 );
 ```
 
@@ -46,6 +55,24 @@ mutation createCategoryQl {
     description
   }
 }
+
+# Create a new course
+mutation createCourseQl {
+  createCourse(input: {
+    name: "My first course"
+    description: "My first course description"
+    categoryId: "8cdd0884-bebc-4af5-a657-b666d62cec18"
+  }) {
+    id
+    name
+    description
+    category {
+      id
+      name
+      description
+    }
+  }
+}
 ```
 
 ### Example of queries:
@@ -56,6 +83,20 @@ query findAllCategories {
     id
     name
     description
+  }
+}
+
+# Find all courses
+query findAllCourses {
+  courses {
+    id
+    name
+    description
+    category {
+      id
+      name
+      description
+    }
   }
 }
 ```
