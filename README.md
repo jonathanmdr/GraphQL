@@ -47,3 +47,15 @@ mutation createCategoryQl {
   }
 }
 ```
+
+### Example of queries:
+```graphql
+# Find all categories
+query findAllCategories {
+  categories {
+    id
+    name
+    description
+  }
+}
+```
